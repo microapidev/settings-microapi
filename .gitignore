@@ -1,7 +1,9 @@
-migrations/
 pycache/
-__pycache__/
 *.pyc
+.idea/
 *.db
+venv/
+__pycache__/
+migrations/
 Pipfile
 Pipfile.lock
