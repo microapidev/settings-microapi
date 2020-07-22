@@ -7,6 +7,7 @@ class Config(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
     api_name = db.Column(db.String(), nullable=False)
+    config_tag = db.Column(db.String, nullable=False, unique=True)
     current_config = db.Column(db.String(), nullable=False)
     previous_config = db.Column(db.String(), nullable=True)
     default_config = db.Column(db.String(), nullable=True)
@@ -22,3 +23,7 @@ class Config(db.Model):
 class ConfigSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Config
+        sqla_session = db.session
+
+config_schema = ConfigSchema()
+config_schema_many = ConfigSchema(many=True)
