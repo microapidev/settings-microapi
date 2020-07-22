@@ -9,9 +9,7 @@ def post(data):
         for key in data:
             if key in ["current_config", "previous_config", "default_config"]:
                 data[key] = json.dumps(data[key])
-
-        config_tag = "{}_{}".format(data['user_id'], data['api_name'])
-        data["config_tag"] = config_tag
+        data["config_tag"] = "{}_{}".format(data['user_id'], data['api_name'])
 
         config = Config(**data)
         db.session.add(config)
