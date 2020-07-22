@@ -12,15 +12,66 @@ produces:
 
 
 paths:
-  /placeholder_DOES_NOT_DO_ANYTHING_REMOVE_AFTER_ADDING_OTHER_ROUTES:
-    get:
-      tags: ["Placeholder"]
-      summary: "Redirect"
-      description: "Redirect user to swagger ui"
-      operationId: settings.placeholder.get
+  /config/new:
+    post:
+      tags: ["Configuration"]
+      summary: "Add a new config entry"
+      description: ""
+      operationId: settings.resources.add_config.post
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "data"
+          description: "Configuration details"
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
       responses:
-        "302":
-          description: "Found"
+        "201":
+          description: "Configuration created"
+          schema:
+            $ref: "#/definitions/Config"
+        "400":
+          description: "Invalid input"
+        "403":
+          description: "Configuration already exist"
 
-#definitions:
+
+definitions:
+  Config:
+    type: "object"
+    required:
+      - "user_id"
+      - "api_name"
+      - "current_config"
+    properties:
+      id:
+        type: "number"
+      user_id:
+        type: "number"
+      api_name:
+        type: "string"
+      config_tag:
+        type: "string"
+      current_config:
+        type: "object"
+        items: {}
+      previous_config:
+        type: "object"
+        items: {}
+      default_config:
+        type: "object"
+        items: {}
+      created_at:
+        type: "string"
+      updated_at:
+        type: "string"
+    example:
+      user_id: 1
+      api_name: 'complaints-microapi'
+      current_config: {"some_json_or_ini": "data"}
+      default_config: {"some_json_or_ini": "data"}
 
