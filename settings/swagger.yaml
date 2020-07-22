@@ -14,10 +14,10 @@ produces:
 paths:
   /placeholder_DOES_NOT_DO_ANYTHING_REMOVE_AFTER_ADDING_OTHER_ROUTES:
     get:
-      tags: ["Redirect"]
+      tags: ["Placeholder"]
       summary: "Redirect"
       description: "Redirect user to swagger ui"
-      operationId: settings.redirect.get
+      operationId: settings.placeholder.get
       responses:
         "302":
           description: "Found"
