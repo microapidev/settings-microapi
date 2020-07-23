@@ -64,6 +64,26 @@ paths:
           description: "Invalid input"
         "403":
           description: "Configuration already exist"
+  /config/{user_id}/all:
+      get:
+        tags: ["Configuration"]
+        summary: "Get all config entry"
+        description: ""
+        operationId: settings.resources.all_config.get
+        produces:
+          - "application/json"
+        parameters:
+          - name: "user_id"
+            in: "path"
+            description: "Get all user configuration details"
+            required: true
+            type: "integer"
+        responses:
+          "200":
+            description: "All configuration"
+          "404":
+            description: "Invalid Id"
+
 
 
 definitions:
