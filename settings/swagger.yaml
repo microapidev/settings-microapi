@@ -144,7 +144,6 @@ paths:
         "404":
           description: "Configuration does not exist"
 
-
 definitions:
   Config:
     type: "object"
