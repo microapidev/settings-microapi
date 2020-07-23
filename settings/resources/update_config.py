@@ -16,11 +16,10 @@ def post(data):
     try:
         for name in ["current_config", "default_config"]:
             if name in data.keys():
+                config_var = getattr(config, name)
                 for k in data[name].keys():
-                    # __setattr__(key, value) if value is none
-                    # use the existing value.
-                    config.__setattr__(
-                        k, data[name].get(k, config.__getattr__(k)))
+                    config_var[k] = data[name].get(k)
+                config.__setattr__(name, config_var)
     except Exception as e:
         print(e)
         resp = {
