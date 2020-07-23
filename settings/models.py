@@ -27,33 +27,3 @@ class ConfigSchema(ma.SQLAlchemyAutoSchema):
 
 config_schema = ConfigSchema()
 config_schema_many = ConfigSchema(many=True)
-/config/delete/{user_id}/{api_name}:
-    delete:
-      tags: ["Configuration"]
-      summary: "Delete Configuration"
-      description: "Delete Configuration that match configTag"
-      operationId: settings.resources.delete_config.delete
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - name: "user_id"
-          in: "path"
-          description: "User id to delete"
-          required: true
-          type: "string"
-        - name: "api_name"
-          in: "path"
-          description: "api_name to delete"
-          required: true
-          type: "string"
-      responses:
-        "201":
-          description: "Configuration Deleted"
-          schema:
-            $ref: "#/definitions/Config"
-        "400":
-          description: "Invalid input"
-        "404":
-          description: "Configuration does not exist"
