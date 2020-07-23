@@ -38,6 +38,32 @@ paths:
           description: "Invalid input"
         "403":
           description: "Configuration already exist"
+  /config/update:
+    post:
+      tags: ["Configuration"]
+      summary: "Update Configuration"
+      description: "Update Configuration that match configTag"
+      operationId: settings.resources.update_config.post
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "data"
+          description: "Configuration details"
+          required: true
+          schema:
+            $ref: "#/definitions/Config"
+      responses:
+        "201":
+          description: "Configuration created"
+          schema:
+            $ref: "#/definitions/Config"
+        "400":
+          description: "Invalid input"
+        "403":
+          description: "Configuration already exist"
 
 
 definitions:
@@ -71,7 +97,7 @@ definitions:
         type: "string"
     example:
       user_id: 1
-      api_name: 'complaints-microapi'
+      api_name: 'settings-microapi'
       current_config: {"some_json_or_ini": "data"}
       default_config: {"some_json_or_ini": "data"}
 
