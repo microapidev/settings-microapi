@@ -97,7 +97,7 @@ definitions:
         type: "string"
     example:
       user_id: 1
-      api_name: 'settings-microapi'
+      api_name: 'email-microapi'
       current_config: {"some_json_or_ini": "data"}
       default_config: {"some_json_or_ini": "data"}
 
