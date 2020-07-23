@@ -3,13 +3,13 @@ from settings.models import Config, config_schema
 from settings.config import db
 
 
-def delete(data):
-    tag = "_".join([str(data["user_id"]), data["api_name"]])
+def delete(user_id,api_name):
+    tag = "_".join([str(user_id), api_name])
     config = Config.query.filter_by(config_tag=tag).first()
     if config is None:
         resp = {
             "status": "Failure",
-            "message": "Config for {} not found".format(data["api_name"])
+            "message": "Config for {} not found".format(api_name)
         }
 
         return resp, 404
@@ -34,4 +34,3 @@ def delete(data):
         }
 
         return resp, 400
-    
