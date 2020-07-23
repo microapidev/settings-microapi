@@ -1,3 +1,4 @@
+import json
 from settings.models import Config, config_schema
 from settings.config import db
 
@@ -16,9 +17,10 @@ def post(data):
     try:
         for name in ["current_config", "default_config"]:
             if name in data.keys():
-                config_var = getattr(config, name)
+                config_var = json.loads(getattr(config, name))
                 for k in data[name].keys():
                     config_var[k] = data[name].get(k)
+                config_var = json.dumps(config_var)
                 config.__setattr__(name, config_var)
     except Exception as e:
         print(e)
