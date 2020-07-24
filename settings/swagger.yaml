@@ -108,7 +108,7 @@ paths:
         "201":
           description: "Configuration Rollback Success"
           schema:
-            $ref: "#/definitions/Config"
+            $ref: "#/definitions/Config_sm"
         "400":
           description: "Invalid input"
         "403":
@@ -138,7 +138,35 @@ paths:
         "201":
           description: "Configuration Deleted"
           schema:
-            $ref: "#/definitions/Config"
+            $ref: "#/definitions/Config_sm"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Configuration does not exist"
+  /config/{user_id}/{api_name}:
+    get:
+      tags: ["Configuration"]
+      summary: "Get single Configuration"
+      description: "Get Configuration that match configTag"
+      operationId: settings.resources.get_single_config.get
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user_id"
+          in: "path"
+          description: "User id"
+          required: true
+          type: "string"
+        - name: "api_name"
+          in: "path"
+          description: "api_name"
+          required: true
+          type: "string"
+      responses:
+        "201":
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Config_sm"
         "400":
           description: "Invalid input"
         "404":
@@ -176,6 +204,7 @@ paths:
         "403":
           description: "Forbidden"
 
+
 definitions:
   Config:
     type: "object"
@@ -210,3 +239,17 @@ definitions:
       api_name: 'email-microapi'
       current_config: {"some_json_or_ini": "data"}
       default_config: {"some_json_or_ini": "data"}
+
+  Config_sm:
+      type: "object"
+      required:
+        - "user_id"
+        - "api_name"
+      properties:
+        user_id:
+          type: "number"
+        api_name:
+          type: "string"
+      example:
+        user_id: 1
+        api_name: 'email-microapi'
