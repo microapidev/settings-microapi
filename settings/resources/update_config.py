@@ -22,7 +22,13 @@ def post(data):
 
         for name in ["current_config", "default_config"]:
             if name in data.keys():
-                config_var = json.loads(getattr(config, name))
+                config_var = getattr(config, name)
+
+                if not config_var:
+                    config_var = {}
+                else:
+                    config_var = json.loads(config_var)
+
                 for k in data[name].keys():
                     config_var[k] = data[name].get(k)
                 config_var = json.dumps(config_var)
