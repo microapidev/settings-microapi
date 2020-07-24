@@ -113,7 +113,36 @@ paths:
           description: "Invalid input"
         "403":
           description: "Forbidden"
-
+  /config/delete/{user_id}/{api_name}:
+    delete:
+      tags: ["Configuration"]
+      summary: "Delete Configuration"
+      description: "Delete Configuration that match configTag"
+      operationId: settings.resources.delete_config.delete
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "user_id"
+          in: "path"
+          description: "User id to delete"
+          required: true
+          type: "string"
+        - name: "api_name"
+          in: "path"
+          description: "api_name to delete"
+          required: true
+          type: "string"
+      responses:
+        "201":
+          description: "Configuration Deleted"
+          schema:
+            $ref: "#/definitions/Config"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Configuration does not exist"
 
 definitions:
   Config:
@@ -149,4 +178,3 @@ definitions:
       api_name: 'email-microapi'
       current_config: {"some_json_or_ini": "data"}
       default_config: {"some_json_or_ini": "data"}
-
