@@ -39,10 +39,10 @@ paths:
         "403":
           description: "Configuration already exist"
   /config/update:
-    post:
+    patch:
       tags: ["Configuration"]
       summary: "Update Configuration"
-      description: "Update Configuration that match configTag"
+      description: "Update Configuration for a specific api"
       operationId: settings.resources.update_config.post
       consumes:
         - "application/json"
@@ -51,19 +51,19 @@ paths:
       parameters:
         - in: "body"
           name: "data"
-          description: "Configuration details"
+          description: "Configuration update data"
           required: true
           schema:
             $ref: "#/definitions/Config"
       responses:
         "201":
-          description: "Configuration created"
+          description: "Configuration updated"
           schema:
             $ref: "#/definitions/Config"
         "400":
           description: "Invalid input"
         "403":
-          description: "Configuration already exist"
+          description: "Bad Request"
   /config/{user_id}/all:
       get:
         tags: ["Configuration"]
@@ -83,6 +83,36 @@ paths:
             description: "All configuration"
           "404":
             description: "Invalid Id"
+  /config/rollback/{user_id}/{api_name}:
+    get:
+      tags: ["Configuration"]
+      summary: "Rollback Configuration"
+      description: "Rollback to the previous configuration"
+      operationId: settings.resources.rollback_config.rollback
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "user_id"
+          description: "unique user identifier"
+          type: "integer"
+          required: true
+        - in: "path"
+          name: "api_name"
+          description: "name of api service"
+          type: "string"
+          required: true
+      responses:
+        "201":
+          description: "Configuration Rollback Success"
+          schema:
+            $ref: "#/definitions/Config"
+        "400":
+          description: "Invalid input"
+        "403":
+          description: "Forbidden"
   /config/delete/{user_id}/{api_name}:
     delete:
       tags: ["Configuration"]
