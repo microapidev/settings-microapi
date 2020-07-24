@@ -1,4 +1,5 @@
 import json
+
 from settings.models import Config, config_schema
 from settings.config import db
 
@@ -15,6 +16,10 @@ def post(data):
         return resp, 404
 
     try:
+        # before performing the update we set the current
+        # config as the previous config so that we can rollback
+        current = config.current_config
+
         for name in ["current_config", "default_config"]:
             if name in data.keys():
                 config_var = json.loads(getattr(config, name))
@@ -30,6 +35,8 @@ def post(data):
         }
 
         return resp, 400
+
+    config.previous_config = current
 
     db.session.add(config)
     db.session.commit()
