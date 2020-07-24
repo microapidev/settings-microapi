@@ -6,3 +6,6 @@ services:
     build: .
     ports:
       - "5209:5207"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
