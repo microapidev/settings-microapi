@@ -143,6 +143,38 @@ paths:
           description: "Invalid input"
         "404":
           description: "Configuration does not exist"
+  /config/{user_id}/{api_name}/default:
+    get:
+      tags: ["Configuration"]
+      summary: "Retrieve Default Configuration"
+      description: "Retrieve the default configuration for an api if exists"
+      operationId: settings.resources.get_default.get
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "user_id"
+          description: "unique user identifier"
+          type: "integer"
+          required: true
+        - in: "path"
+          name: "api_name"
+          description: "name of api service"
+          type: "string"
+          required: true
+      responses:
+        "201":
+          description: "Default Configuration Retrieval Success"
+          schema:
+            $ref: "#/definitions/Config"
+        "400":
+          description: "Invalid input"
+        "404":
+          description: "Not Found"
+        "403":
+          description: "Forbidden"
 
 definitions:
   Config:
