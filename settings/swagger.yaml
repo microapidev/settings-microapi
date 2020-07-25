@@ -237,8 +237,8 @@ definitions:
     example:
       user_id: 1
       api_name: 'email-microapi'
-      current_config: {"some_json_or_ini": "data"}
-      default_config: {"some_json_or_ini": "data"}
+      current_config: {"key_1": "value_1", "key_2": "value_2"}
+      default_config: {"key_1": "value_1", "key_2": "value_2"}
 
   Config_sm:
       type: "object"
