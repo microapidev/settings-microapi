@@ -3,7 +3,6 @@ from settings.models import Config, config_schema
 def get(user_id, api_name):
     tag = "_".join([str(user_id), api_name])
     config = Config.query.filter_by(config_tag=tag).first()
-    config = config.current_config
     if config is None:
         resp = {
             "status": "Failure",
@@ -13,10 +12,11 @@ def get(user_id, api_name):
         return resp, 404
 
     try:
+        single_config = config.current_config
         resp = {
             "status": "Success",
             "message": f"Config for {api_name}",
-            "result": config
+            "result": single_config
         }
 
         return resp, 200
