@@ -204,6 +204,27 @@ paths:
         "403":
           description: "Forbidden"
 
+  /info:
+    get:
+      tags: ['API Info']
+      summary: "Produces basic API info"
+      description: "This fetches information on this API to populate the dashboard"
+      operationId: settings.common.api_info.get
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: 'Retrieve Success'
+          schema:
+            type: "object"
+            properties:
+              items: {}
+        404:
+          description: 'Not Found'
+        403:
+          description: 'Forbidden'
 
 definitions:
   Config:
