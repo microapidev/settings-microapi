@@ -1,7 +1,5 @@
 import json
-
-from settings.models import Config, config_schema
-from settings.config import db
+from settings.models import db,  Config, config_schema
 
 
 def post(data):

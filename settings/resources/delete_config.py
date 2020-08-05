@@ -1,6 +1,4 @@
-import json
-from settings.models import Config, config_schema
-from settings.config import db
+from settings.models import db, Config
 
 
 def delete(user_id,api_name):

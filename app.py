@@ -12,10 +12,10 @@ def redir():
     return render_template('404.html', url_for=url_for, doc=swagger_doc_url)
 
 
-if os.environ['FLASK_ENV'] == 'development' and not os.path.exists(os.path.join(db_path, 'settings.db')):
-    from settings.models import db
-    db.create_all()
-    db.session.commit()
+# if os.environ['FLASK_ENV'] == 'development' and not os.path.exists(os.path.join(db_path, 'settings.db')):
+#     from settings.models import db
+#     db.create_all()
+#     db.session.commit()
 
 
 if __name__ == '__main__':

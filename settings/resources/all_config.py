@@ -1,5 +1,4 @@
 from settings.models import Config, config_schema_many
-from settings.config import db
 
 
 def get(user_id):

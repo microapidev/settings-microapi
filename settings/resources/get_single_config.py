@@ -1,4 +1,5 @@
-from settings.models import Config, config_schema
+from settings.models import Config
+
 
 def get(user_id, api_name):
     tag = "_".join([str(user_id), api_name])
