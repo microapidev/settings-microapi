@@ -1,7 +1,8 @@
 from flask import json
 from sqlalchemy.exc import IntegrityError
-from settings.config import db
 from settings.models import Config, config_schema
+from settings.common.users import get_user_session
+# from settings.common.config_serializer import serialize
 
 
 def post(data):
@@ -12,16 +13,20 @@ def post(data):
         data["config_tag"] = "{}_{}".format(data['user_id'], data['api_name'])
 
         config = Config(**data)
-        db.session.add(config)
-        db.session.commit()
+        session = get_user_session(data['user_id'])
+        session.add(config)
+        session.commit()
+
+        json_config = config_schema.dump(config)
+        session.close()
         resp = {
             "status": "Success",
             "message": "Create Success",
-            "result": config_schema.dump(config)
+            "result": json_config
         }
         return resp, 201
 
-    except IntegrityError:
+    except IntegrityError as e:
         resp = {
             "status": "Failure",
             "message": "Config already exists! Please update instead",

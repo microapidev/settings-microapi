@@ -1,19 +1,22 @@
 from settings.models import Config, config_schema_many
-from settings.config import db
+from settings.common.users import get_user_session
 
 
 def get(user_id):
-    config = Config.query.filter_by(user_id=user_id).all()
-    if config != []:
+    session = get_user_session(user_id)
+    config = session.query(Config).all()
+    if config:
         resp = {
             "status": "Success",
             "message": f"All configuration associated with user {user_id}",
             "result": config_schema_many.dump(config)
         }
+        session.close()
         return resp, 200
     resp = {
         "status": "Failure",
         "message": "Invalid Id",
         "result": ''
     }
+    session.close()
     return resp, 404

@@ -77,7 +77,7 @@ paths:
             in: "path"
             description: "Get all user configuration details"
             required: true
-            type: "integer"
+            type: "string"
         responses:
           "200":
             description: "All configuration"
@@ -97,7 +97,7 @@ paths:
         - in: "path"
           name: "user_id"
           description: "unique user identifier"
-          type: "integer"
+          type: "string"
           required: true
         - in: "path"
           name: "api_name"
@@ -185,7 +185,7 @@ paths:
         - in: "path"
           name: "user_id"
           description: "unique user identifier"
-          type: "integer"
+          type: "string"
           required: true
         - in: "path"
           name: "api_name"
@@ -209,7 +209,7 @@ paths:
       tags: ['API Info']
       summary: "Produces basic API info"
       description: "This fetches information on this API to populate the dashboard"
-      operationId: settings.common.api_info.get
+      operationId: settings.common.api_info.get_info
       consumes:
         - "application/json"
       produces:
@@ -226,6 +226,29 @@ paths:
         403:
           description: 'Forbidden'
 
+  /docs/:
+    get:
+      tags: ['API Info']
+      summary: "Produces the full API documentation"
+      description: "This fetches the full API specification in OpenAPI v3 format"
+      operationId: settings.common.api_info.get_docs
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: 'Retrieve Success'
+          schema:
+            type: "object"
+            properties:
+              items: {}
+        404:
+          description: 'Not Found'
+        403:
+          description: 'Forbidden'
+
+
 definitions:
   Config:
     type: "object"
@@ -237,7 +260,7 @@ definitions:
       id:
         type: "number"
       user_id:
-        type: "number"
+        type: "string"
       api_name:
         type: "string"
       config_tag:
@@ -256,7 +279,7 @@ definitions:
       updated_at:
         type: "string"
     example:
-      user_id: 1
+      user_id: "41ce7a1"
       api_name: 'email-microapi'
       current_config: {"key_1": "value_1", "key_2": "value_2"}
       default_config: {"key_1": "value_1", "key_2": "value_2"}
@@ -268,9 +291,12 @@ definitions:
         - "api_name"
       properties:
         user_id:
-          type: "number"
+          type: "string"
         api_name:
           type: "string"
       example:
-        user_id: 1
+        user_id: "41ce7a1"
         api_name: 'email-microapi'
+
+#externalDocs:
+#  url: /docs
