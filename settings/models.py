@@ -49,6 +49,3 @@ class DashSchema(ma.SQLAlchemyAutoSchema):
 
 config_schema = ConfigSchema()
 config_schema_many = ConfigSchema(many=True)
-
-db.create_all()
-db.session.commit()
