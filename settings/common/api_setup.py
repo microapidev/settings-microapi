@@ -1,13 +1,22 @@
+# imports go here
+
+api_settings = [
+    {
+        "setting_name": "Database URL (Served SQLite, PostgreSQL or MySQL)",
+        "setting_type": "String",
+        "setting_key": "database_url",
+        "setting_required": True,
+        "setting_value": None
+    },
+
+]
 
 
 def get():
-    setup_required = {
-        "default": "Misc",
-        "others": []
-    }
-    return setup_required, 200
+    # do stuff
+    return api_settings, 200
 
 
-settings_frame = {
-    "": ""
-}
+def patch(data):
+    # do stuff
+    pass
