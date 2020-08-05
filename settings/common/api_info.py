@@ -1,8 +1,6 @@
-from flask import request, url_for
 import requests
-
-CONVERTER_URL = 'https://converter.swagger.io/api/convert'
-SWAGGER_V2_URL = '/v1/swagger.json'
+from flask import request, url_for
+from settings.config import SWAGGER_V2_URL, OPEN_API_CONVERTER_URL
 
 
 def get_info():
@@ -21,7 +19,7 @@ def get_docs():
     url_root = request.url_root
     url_root = url_root[:-1] if url_root[-1] == '/' else url_root
 
-    req = requests.request('GET', url=CONVERTER_URL, params={'url': url_root + SWAGGER_V2_URL})
+    req = requests.request('GET', url=OPEN_API_CONVERTER_URL, params={'url': url_root + SWAGGER_V2_URL})
     if req.status_code != 200:
         return {'message': 'Something went wrong', 'status': 'Failure'}, req.status_code
 

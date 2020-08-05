@@ -1,23 +1,12 @@
-import os
 from flask import current_app
 from sqlalchemy import MetaData
 from settings.models import db, user_table
-from settings.config import db_path
-
-USER_DB_URI = 'sqlite:///' + os.path.join(db_path, 'user_{}.db')
-
-
-# def get_user_settings():
-#     todo: this function should query the db to check authorization and get settings (like db uri)
-#
-#     return db_url, settings
+from settings.common.helpers import get_db_url
 
 
 def prepare_bind(user_id):
     if user_id not in current_app.config['SQLALCHEMY_BINDS']:
-        current_app.config['SQLALCHEMY_BINDS'][user_id] = USER_DB_URI.format(user_id)
-        if user_id == '5':
-            current_app.config['SQLALCHEMY_BINDS'][user_id] = os.environ['AMAZON_RDS_DB_URL']
+        current_app.config['SQLALCHEMY_BINDS'][user_id] = get_db_url(user_id)
     return current_app.config['SQLALCHEMY_BINDS'][user_id]
 
 
