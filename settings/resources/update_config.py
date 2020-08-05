@@ -1,10 +1,13 @@
 import json
-from settings.models import db,  Config, config_schema
+# from settings.common.config_serializer import serialize
+from settings.common.users import get_user_session
+from settings.models import Config, config_schema
 
 
 def post(data):
     tag = "_".join([str(data["user_id"]), data["api_name"]])
-    config = Config.query.filter_by(config_tag=tag).first()
+    session = get_user_session(data['user_id'])
+    config = session.query(Config).filter_by(config_tag=tag).first()
     if config is None:
         resp = {
             "status": "Failure",
@@ -37,18 +40,19 @@ def post(data):
             "status": "Failure",
             "message": "Unexpected Error Occurred"
         }
-
         return resp, 400
 
     config.previous_config = current
+    # session = get_user_session(data['user_id'])
+    session.add(config)
+    session.commit()
 
-    db.session.add(config)
-    db.session.commit()
+    json_config = config_schema.dump(config)
+    session.close()
 
     resp = {
         "status": "Success",
         "message": "Update Success",
-        "result": config_schema.dump(config)
+        "result": json_config
     }
-
     return resp, 200
