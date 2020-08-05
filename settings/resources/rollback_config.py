@@ -1,4 +1,4 @@
-from settings.common.users import get_user_session
+from settings.users import get_user_session
 from settings.models import Config, config_schema
 
 

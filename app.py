@@ -1,10 +1,8 @@
 from flask import render_template, url_for
 from settings.config import connex_app
-from settings.models import db
 
 connex_app.add_api('swagger.yaml', options={"swagger_url": '/ui'})
 application = connex_app.app
-db.create_all()
 
 
 @connex_app.route('/')

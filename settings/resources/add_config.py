@@ -1,7 +1,7 @@
 from flask import json
 from sqlalchemy.exc import IntegrityError
 from settings.models import Config, config_schema
-from settings.common.users import get_user_session
+from settings.users import get_user_session
 # from settings.common.config_serializer import serialize
 
 

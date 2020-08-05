@@ -1,5 +1,5 @@
 from settings.models import Config, config_schema_many
-from settings.common.users import get_user_session
+from settings.users import get_user_session
 
 
 def get(user_id):
