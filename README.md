@@ -11,10 +11,7 @@ pip install -r requirements.txt
   python -m unittest
 ```
 #### or run each tests separately 
-+ Change to repository directory
-```
-  cd complaint-microapi\
-```
+
 + Move to tests directory
 ```
   cd tests\
